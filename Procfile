@@ -1,2 +1,2 @@
 
-web: python manage.py runserver https://twiclo.herokuapp.com:80
+web: python manage.py runserver twiclo.herokuapp.com:80
