@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{%block content %}
+
+
+	<script type='text/javascript'>
+function preview_image(event) 
+{
+ var reader = new FileReader();
+ reader.onload = function()
+ {
+  var output = document.getElementById('output_image');
+  output.src = reader.result;
+ }
+ reader.readAsDataURL(event.target.files[0]);
+}
+</script>
+
+<br><br>
+<body background="b2.jpg" style="color: white">
+	<form action="{% url 'food_url' %}" method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+		<center>
+		}
+<h1>Upload Yor Dish</h1><br><br>
+
+Image:<input type="file" name="foodimg" accept="image/*" onchange="preview_image(event)"> <br><br><br>
+														<img id="output_image"/ style="max-width: 300px;"><br>
+Name:<input type="text" name="foodname"  placeholder="Name"><br><br>
+FoodID:<input type="text" name="foodid" placeholder="FoodID"><br><br>
+Rate:<input type="number" name="rate" placeholder="Rate"><br><br>
+Chef:<input type="text" name="chef"  placeholder="Chef"><br><br>
+Details:<textarea name="details" placeholder="Details"></textarea><br><br>
+<label>Preparation Time:</label>				<select name="ptime">
+								<option value="<15">less than 15 Min</option>
+								<option value="15-30"> Between 15 - 30 Min </option>
+								<option value=">30">more than 30 min</option>
+								<option value=">60">more than 1 Hour</option>
+							</select><br><br>
+<input type="submit" name="submitfood" value="Submit">
+<input type="reset" name="resetfood" value="Reset">
+
+
+</center>
+</form>
+
+{%endblock%}

@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{%block content %}
+<br><br><br>
+<div>
+
+ <form id="frm1" method="post" action="{% url 'hotelreg_url' %}" enctype="multipart/form-data">
+ {% csrf_token%}
+<table border='0' width='480px' cellpadding='0' cellspacing='0' align='center'>
+<center><tr>
+   <td><h1>Hotel Registration</h1></td>
+
+</tr></center></table><br><br>
+ 
+<table border='0' width='480px' cellpadding='0' cellspacing='0' align='center'>
+<tr>
+    <td align='center'>Name:</td>
+    <td><input type='text' name='name' placeholder="Your Name"></td>
+</tr>
+<tr> <td>&nbsp;</td> </tr>
+<tr>
+    <td align='center'>UserName</td>
+    <td><input type='text' name='uname' placeholder="UserName"></td>
+</tr>
+<tr> <td>&nbsp;</td> </tr>
+<tr>
+    <td align='center'>Location:</td>
+    <td><input type='text' name='location' placeholder="Your Location"></td>
+
+</tr>
+
+<tr><td>&nbsp;</td> </tr>
+<tr>
+    <td align='center'>Password:</td>
+    <td><input type="Password" name="password" placeholder="Password"></td>
+</tr>
+<tr> <td>&nbsp;</td> </tr>
+
+<tr>
+    <td align='center'>Confirm Password:</td>
+    <td><input type='Password' name='conpassword' placeholder="confirm password"></td>
+</tr>
+<tr> <td>&nbsp;</td> </tr>
+
+<tr>
+    <td align='center'>Address:</td>
+    <td><textarea name="address">ADDRESS</textarea></td>
+</tr>
+<tr> <td>&nbsp;</td> </tr>
+<tr>
+    <td align='center'>Phone:</td>
+    <td><input type='Phone' name='phone' placeholder="Phone"></td>
+</tr>
+<tr> <td>&nbsp;</td> </tr>
+<tr>
+    <td align='center'>Email:</td>
+    <td><input type='text' name='email' placeholder="Email"></td>
+</tr>
+<tr> <td>&nbsp;</td> </tr>
+<tr>
+    <td align='center'>Permit Number</td>
+    <td><input type='text' name='permit' placeholder="PermitNumber"></td>
+</tr>
+<tr> <td>&nbsp;</td> </tr>
+<tr>
+    <td align='center'>Working Hours</td>
+    <td>From
+        <select name="opent">
+        <option value="1">1:00 am</option>
+        <option value="2">2:00 am</option>
+        <option value="3">3:00 am</option>
+        <option value="4">4:00 am</option>
+        <option value="5">5:00 am</option>
+        <option value="6">6:00 am</option>
+        <option value="7">7:00 am</option>
+        <option value="8">8:00 am</option>
+        <option value="9">9:00 am</option>
+        <option value="10">10:00 am</option>
+        <option value="10">11:00 am</option>
+        <option value="10">12:00 am</option>
+    </select></td>
+<td>To
+    <select name="closet">
+        <option value="1">1:00 pm</option>
+        <option value="2">2:00 pm</option>
+        <option value="3">3:00 pm</option>
+        <option value="4">4:00 pm</option>
+        <option value="5">5:00 pm</option>
+        <option value="6">6:00 pm</option>
+        <option value="7">7:00 pm</option>
+        <option value="8">8:00 pm</option>
+        <option value="9">9:00 pm</option>
+        <option value="10">10:00 pm</option>
+        <option value="10">11:00 pm</option>
+        <option value="10">12:00 pm</option>
+    </select></td>
+</tr>
+<tr><td>
+   
+        <input type="checkbox" name="ftype" value="1"> veg only
+        <input type="checkbox" name="ftype" value="2">veg and non veg  
+        <input type="checkbox" name="ftype" value="3">juice and snack
+        <input type="checkbox" name="ftype" value="4">Chines
+        <input type="checkbox" name="ftype" value="5">cakes
+</td></tr>
+<tr><td><input type="file" name="img"></td></tr></table><br><br>
+<table border='0' cellpadding='0' cellspacing='0' width='480px' align='center'>
+
+<tr>
+    <td align='center'><input type='submit' name='REGISTER' value="Register"></td>
+    <td align='center'><input type='reset' name='reset' value="Reset"></td>
+</tr>
+</table>
+</table>
+ 
+</table>
+</form>
+</div>
+{%endblock%}

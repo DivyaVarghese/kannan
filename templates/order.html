@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{%block content %}
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+	 $(document).ready(function() {
+	
+        $("button").click(function(){
+        	alert('inside');
+            var item = [],count=[];
+          $('input[name="opt"]:checked').each(function() {
+          		
+                 item.push($(this).val());
+    
+            });
+          	
+
+          $("input[name='count']").each(function (i,v) {
+		    count.push($(this).val());
+			});
+
+
+       alert(item);
+       alert(count)
+       var d={}
+       for(x=0;x<item.length;x++){
+
+       	d[item[x]]=count[x];
+       }
+       alert(d);
+       console.log(d);
+       data=JSON.stringify(d);
+
+		$.ajax({
+		    url: "{% url 'order_url' %}",
+		    type: "POST", // or "get"
+		    data: data,
+		    success: function(data) {
+
+		      alert(data.result);
+		      
+		      window.location.href="{% url 'bill_url' %}"
+    								}
+			});
+
+        });
+    });
+</script>
+			<section class="blog-area section-gap" id="blog">
+				<div class="container">
+
+					<div class="row d-flex justify-content-center">
+						<div class="menu-content pb-70 col-lg-8">
+							<div class="title text-center">
+								<h1 class="mb-10">Menu</h1>
+								<p>	{{request.user}}</p>
+							</div>
+						</div>
+						<button type="button">Place an Order</button>
+<br><br>
+<br>
+					</div>					
+					<div class="row">
+						 {% for x in f %}
+						<div class="col-lg-3 col-md-6 single-blog ss" id="{{x.hid}}">
+							<input type="checkbox" name="opt" value="{{x.fid}}"><input type="text" value="1" name="count" >
+							<div class="thumb">
+								<img class="img-fluid" src="{{x.img.url}}" alt="">
+							</div>
+							<p class="date"></p>
+							<a href=""><h4>{{x.foodname}}<br>Prize:{{x.prize}}<br>Cook Time:{{x.time}}<br>Available Time:{{x.atime}}<br>Details:{{x.details}}</h4></a>
+							
+															
+						</div>	
+						{% endfor %}					
+					</div>
+				</div>	
+			</section>
+
+{% endblock %}

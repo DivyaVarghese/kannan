@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{%block content %}
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+	 $(document).ready(function() {
+	
+        $("button").click(function(){
+        	alert('inside');
+        	var time=[],em=[],d={},oid=[];
+        	 $("input[name='time']").each(function (i,v) {
+		    time.push($(this).val());
+			});
+        	  $("input[name='email']").each(function (i,v) {
+		    em.push($(this).val());
+			});
+        	  $("input[name='oid']").each(function (i,v) {
+		    oid.push($(this).val());
+			});
+
+
+			for(i=0;i<em.length;i++){
+				d[oid[i]]=[time[[i],em[i]];
+
+			}
+			  data=JSON.stringify(d);
+
+			$.ajax({
+		    url: "{% url 'whotel_url' %}",
+		    type: "POST", // or "get"
+		    data: data,
+		    success: function(data) {
+
+		      alert(data.result);
+		      
+		      window.location.href="{% url 'whotel_url' %}"
+    								}
+			});
+
+
+
+
+
+
+
+        });
+    });
+</script>
+
+
+
+<br><br><br>
+<div style="width: 1340px;height: 400px;">
+	<a href="{% url 'food_url' %}" class="btn btn-primary" style="margin-left: 700px;">ADD FOOD</a>
+{% for x in em %}
+<input type="text" name="email" value="{{x}}">
+{% endfor %}
+{% for x in oxx %}
+<input type="text" name="oid" value="{{x}}">
+{% endfor %}
+<div class="container">
+	<div class="row">
+		
+		<div class="col-md-2">
+			{% for x in p %}
+			<div>{{x}}</div>
+			{% endfor %}
+		</div>
+		
+		
+		<div class="col-md-1" >
+			{% for x in c %}
+			<div>{{x}}</div>
+			{% endfor %}
+		</div>
+		<div class="col-md-6">
+			{% for x in g %}
+			<div>{{x}}</div><br>
+			{% endfor %}
+		</div>
+		<div class="col-md-2" >
+			{% for x in h %}
+			TOTAL<div style="display: inline;">{{x}}<input type="text" name="time" placeholder="MINITUS TO REACH" style="background-color: silver;"></div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
+	<button name="send" class="btn btn-danger" style="margin-left: 1000px;">Send </button>
+
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{%block content %}
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+	 $(document).ready(function() {
+	
+    $("input[type='button']").click(function(){
+    	var location=$('#location').val();
+    	var pho=$('#pho').val();
+    	var d={};
+
+            var radioValue = $("input[name='mode']:checked").val();
+            alert(radioValue);
+				if(radioValue=='cash')
+				{
+					d['location']=location;
+					d['pho']=pho;
+					d['mode']='cash';
+					alert(d)
+					data=JSON.stringify(d);
+					console.log(d);
+					console.log(data);
+					
+					$.ajax({
+					    url: "{% url 'bill_url' %}",
+					    type: "POST", // or "get"
+					    data: data,
+					    success: function(data) {
+
+					      alert(data.result);
+					      
+					      window.location.href="{% url 'index_url' %}"
+			    								}
+						});
+
+				}
+				else if(radioValue=='card')
+				{
+					var cardno=$('#cardno').val()
+					var cvv=$('#cvv').val()
+					var month=$('select[name="month"] option:selected').val()
+					var year=$('select[name="year"] option:selected').val()
+					alert(cardno,cvv,month,year);
+					d['location']=location;
+					d['pho']=pho;
+					d['mode']='card';
+					d['cardno']=cardno;
+					d['cvv']=cvv;
+					d['month']=month;
+					d['year']=year;
+					alert(d);
+					data=JSON.stringify(d);
+					$.ajax({
+					    url: "{% url 'bill_url' %}",
+					    type: "POST", // or "get"
+					    data: data,
+					    success: function(data) {
+
+					      alert(data.result);
+					      
+					      window.location.href="{% url 'index_url' %}"
+			    								}
+						});
+				}
+
+
+
+       });
+    });
+</script>
+
+
+
+
+<section class="blog-area section-gap" id="blog">
+				<div class="container">
+
+					<div class="row d-flex justify-content-center">
+						<div class="menu-content pb-70 col-lg-8">
+							<div class="title text-center">
+								<h1 class="mb-10">BILL</h1>
+								<p>	{{request.user}}</p>
+							</div>
+						</div>
+						
+					</div>					
+					<div class="row">
+						
+						<div class="col-sm-4">
+							FOOD
+							{% for x in l%}
+							<div>{{x}}</div>
+							{% endfor %}
+						</div>	
+						
+						
+						<div class="col-sm-4">
+							Count
+							{% for x in c%}
+							<div>{{x}}</div>
+							{% endfor %}
+						</div>	
+						
+						
+						<div class="col-sm-4">
+							TOTAL
+							{% for x in tot%}
+							<div>{{x}}</div>
+							{% endfor %}
+						</div>		
+						
+					</div>
+					<div class="row">TOTAL
+						<div class="col-md-4">{{s}}
+						 </div>
+					</div>
+					<div class="row">OFFER
+						<div class="col-md-4">{{offer}}%
+						 </div>
+					</div>
+					<div class="row">GRAND TOTAL
+						<div class="col-md-4">{{grand}}
+						 </div>
+					</div>
+				</div>	
+			</section>
+			<form action="{% url 'bill_url' %}" method="POST" style="margin-bottom: 20px;">
+				<div style="margin-left: 500px;"><textarea placeholder="Delivery Location" id="location"></textarea><br><input type="text" id="pho" placeholder="Contact Number"></div>
+				<div id="ff">
+					<h3 style="text-align: center;">PAYMENT</h3>
+					<input type="radio" name="mode" value="cash">CASH PAYMENT
+					<input type="radio" name="mode" value="card">CARD PAYMENT
+					<div id="tt" style="width: 300px; margin-left: 800px;">
+						<input type="text" id="cardno" placeholder="card number" style="margin-left: -1px;">
+						<input type="text" id="cvv" placeholder="cvv" style="margin-left: -1px;"><br>
+						Expiry	
+						<select name="month" style="">
+							<option value="1">jan</option>
+							<option value="2">feb</option>
+							<option value="3">mar</option>
+						</select>
+						<select name="year">
+							<option value="2020">2020</option>
+							<option value="2021">2021</option>
+							<option value="2022">2022</option>
+						</select>
+					</div>
+				</div>
+				<input type="button" name="ok" value="CONFIRM" style="margin-left: 600px;">
+			</form>
+			<style type="text/css">
+				#ff input{
+					margin-left: 370px;
+
+				}
+				#tt select{
+					display: inline-block;
+				}
+			</style>
+
+{% endblock %}

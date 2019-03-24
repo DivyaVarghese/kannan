@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{%block content %}	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+
+	$(document).ready(function(){
+		
+		$(".ss").click(function(){
+			// alert('divID');
+		
+     	var divID = this.id;
+     	alert(divID);
+		// var d={}
+		// d[divID]=1;
+
+		$.ajax({
+		    url: "{% url 'wcustomer_url' %}",
+		    type: "POST", // or "get"
+		    data: divID,
+		    success: function(data) {
+
+		      alert(data.result);
+		      
+		      window.location.href="{% url 'order_url' %}"
+    								}
+			});
+});
+
+	});
+
+</script>
+<!-- start blog Area -->		
+			<section class="blog-area section-gap" id="blog">
+				<div class="container">
+					<div class="row d-flex justify-content-center">
+						<div class="menu-content pb-70 col-lg-8">
+							<div class="title text-center">
+								<h1 class="mb-10">OUR RESTURANTSXC</h1>
+								<p>	{{request.user}}</p>
+							</div>
+						</div>
+					</div>					
+					<div class="row">
+						 {% for x in u %}
+						<div class="col-lg-3 col-md-6 single-blog ss" id="{{x.hid}}">
+							<div class="thumb">
+								<img class="img-fluid" src="{{x.image.url}}" alt="">
+							</div>
+							<p class="date"></p>
+							<a href="{% url 'index_url' %}"><h4>{{x.name1}}<br>{{x.opent}}AM-{{x.closet}}PM<br>{{x.pho}}<br>{{x.address}}</h4></a>
+							
+															
+						</div>	
+						{% endfor %}					
+					</div>
+				</div>	
+			</section>
+			<!-- end blog Area -->	
+			<!-- <div class="ss">kugkhf</div><br><br> -->
+
+{%endblock%}	
