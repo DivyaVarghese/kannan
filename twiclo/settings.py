@@ -123,7 +123,7 @@ SUPER_DIR=os.path.abspath(os.path.join(PROJECT_DIR,os.path.pardir))
 STATICFILES_DIRS=(os.path.join(SUPER_DIR,'static'),)
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
-
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = '/static/'
 MEDIA_URL='/media/'
 
